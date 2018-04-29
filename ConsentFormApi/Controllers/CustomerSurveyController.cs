@@ -20,9 +20,9 @@ namespace ConsentFormApi.Controllers
         }
 
         [HttpGet("api/[controller]/[action]/{customerId}")]
-        public IEnumerable<CustomerSurveyData> GetCustomerSurveys(long customerId)
+        public IActionResult GetCustomerSurveys(long customerId)
         {
-            return _customerSurveyService.GetCustomerSurveyDatas(customerId);
+            return Ok(_customerSurveyService.GetCustomerSurveyDatas(customerId));
         }
     }
 }

@@ -14,6 +14,7 @@ namespace ConsentFormApi.Repository
     public class CustomerSurveyRepository : ICustomerSurveyRepository
     {
         private readonly ConnectionStrings _connectionStrings;
+
         public CustomerSurveyRepository(ConnectionStrings connectionStrings)
         {
             _connectionStrings = connectionStrings;

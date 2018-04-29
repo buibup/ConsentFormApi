@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConsentFormApi.Models
 {
-    public class Topic
+    public partial class Topic
     {
-        public long Id { get; set; }
+        public Topic()
+        {
+            SubTopics = new HashSet<SubTopic>();
+        }
+
+        public int Id { get; set; }
         public string Name { get; set; }
-        public long SurveyId { get; set; }
+        public int SurveyId { get; set; }
+
+        public Survey Survey { get; set; }
+        public ICollection<SubTopic> SubTopics { get; set; }
     }
 }

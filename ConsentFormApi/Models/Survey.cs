@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConsentFormApi.Models
 {
-    public class Survey
+    public partial class Survey
     {
-        public long Id { get; set; }
+        public Survey()
+        {
+            Topics = new HashSet<Topic>();
+        }
+
+        public int Id { get; set; }
         public string Name { get; set; }
+        //[JsonIgnore]
+        public ICollection<Topic> Topics { get; set; }
     }
 }
