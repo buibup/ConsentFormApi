@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ConsentFormApi.Service
+namespace ConsentFormApi.Repository
 {
-    public interface ISurveyChartsService
+    public class SubTopicRepository
     {
-        SurveyBarChart GetSurveyBarChart(int year);
-
     }
 }

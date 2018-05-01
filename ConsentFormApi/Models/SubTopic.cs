@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace ConsentFormApi.Models
@@ -9,6 +10,7 @@ namespace ConsentFormApi.Models
         public string Name { get; set; }
         public int TopicId { get; set; }
 
+        [JsonIgnore]
         public Topic Topic { get; set; }
     }
 }

@@ -9,5 +9,7 @@ namespace ConsentFormApi.Repository
     public interface ICustomerSurveyRepository
     {
         IEnumerable<CustomerSurveyData> GetCustomerSurveyDatas(long customerId);
+
+        IEnumerable<CustomerSurveyData> CustomerSurveyData(int year);
     }
 }

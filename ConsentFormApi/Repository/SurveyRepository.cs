@@ -28,6 +28,7 @@ namespace ConsentFormApi.Repository
             }
         }
 
+
         public void DeleteSurvey(long id)
         {
             using (var db = new SqlConnection(_connectionStrings.ConsentForm))
@@ -40,7 +41,64 @@ namespace ConsentFormApi.Repository
         {
             using(var db = new SqlConnection(_connectionStrings.ConsentForm))
             {
-                return db.Query<Survey>(SurveyDbQuery.GetSurvey(), new { Id = id }).FirstOrDefault();
+                var survey = db.Query<Survey>(SurveyDbQuery.GetSurvey(), new { Id = id }).FirstOrDefault();
+
+                var topics = db.Query<Topic>(SurveyDbQuery.GetTopic(), new { SurveyId = id }).ToList();
+
+                var topicIdList = topics.Select(t => t.Id).Distinct();
+
+                var subTopics = db.Query<SubTopic>(SurveyDbQuery.GetSubTopic(), new { @TopicId = topicIdList });
+
+                foreach(var topic in topics)
+                {
+                    foreach (var subTopic in subTopics)
+                    {
+                        if(topic.Id == subTopic.TopicId)
+                        {
+                            topic.SubTopics.Add(subTopic);
+                        }
+                    }
+                }
+
+                survey.Topics = topics;
+
+                return survey;
+            }
+        }
+
+        public Survey GetSurveyChild(long id)
+        {
+            using(var db = new SqlConnection(_connectionStrings.ConsentForm))
+            {
+                var surveyDictionary = new Dictionary<int, Survey>();
+
+                var result = db.Query<Survey, Topic, SubTopic, Survey>(SurveyDbQuery.GetSurveyChild(),
+                    (survey, topic, subTopic) =>
+                    {
+
+                        //topic.SubTopics.Add(subTopic);
+                        //survey.Topics.Add(topic);
+
+
+                        //return survey;
+
+                        if (!surveyDictionary.TryGetValue(survey.Id, out Survey surveyEntry))
+                        {
+                            surveyEntry = survey;
+                            surveyEntry.Topics = new List<Topic>();
+                            surveyDictionary.Add(surveyEntry.Id, surveyEntry);
+                        }
+
+                        if (survey.Id == topic.SurveyId)
+                        {
+                            surveyEntry.Topics.Add(topic);
+                        }
+
+                        return surveyEntry;
+
+                    }, new { id }, splitOn: "id").FirstOrDefault();
+
+                return result;
             }
         }
 

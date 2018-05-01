@@ -39,10 +39,4 @@ namespace ConsentFormApi.Models
             return new SurveyBarChart { SubTopicValues = subTopicsValue, ChartLabels = barChartLabelList.ToArray() } ;
         }
     }
-
-    public class SubTopicValue
-    {
-        public double[] Values { get; set; }
-        public string SubTopicName  { get; set; }
-    }
 }

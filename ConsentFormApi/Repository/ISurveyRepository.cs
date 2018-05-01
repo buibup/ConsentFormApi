@@ -9,6 +9,7 @@ namespace ConsentFormApi.Repository
     public interface ISurveyRepository
     {
         Survey GetSurvey(long id);
+        Survey GetSurveyChild(long id);
         List<Survey> GetSurveys();
         long AddSurvey(Survey survey);
         void UpdateSurvey(Survey survey);

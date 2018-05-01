@@ -28,7 +28,6 @@ namespace ConsentFormApi.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Server=10.90.10.36;Database=consentDb;User Id=sa;Password='bW(|)B$q|1';");
             }
         }

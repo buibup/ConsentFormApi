@@ -32,7 +32,7 @@ namespace ConsentFormApi.Controllers
         [HttpGet("[action]/{id}")]
         public IActionResult GetSurvey(long id)
         {
-            return Ok(_surveyRepository.GetSurvey(id));
+            return Ok(_surveyRepository.GetSurveyChild(id));
         }
 
         [HttpDelete("[action]/{id}")]

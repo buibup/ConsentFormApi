@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConsentFormApi.Service
 {
-    public interface ISurveyChartsService
+    public interface ISurveyDataService
     {
-        SurveyBarChart GetSurveyBarChart(int year);
-
+        List<SubTopicValue> SubTopicValuesByYear(int year);
     }
 }

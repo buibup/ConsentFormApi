@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using ConsentFormApi.Common;
+using ConsentFormApi.DbQuery;
 using ConsentFormApi.Models;
 using Dapper;
 
@@ -19,6 +20,15 @@ namespace ConsentFormApi.Repository
         {
             _connectionStrings = connectionStrings;
         }
+
+        public IEnumerable<CustomerSurveyData> CustomerSurveyData(int year)
+        {
+            using(var db = new SqlConnection(_connectionStrings.ConsentForm))
+            {
+                return db.Query<CustomerSurveyData>(CustomerSurveyDbQuery.CustomersSurveysDataByYear(), new { year }).ToList();
+            }
+        }
+
         public IEnumerable<CustomerSurveyData> GetCustomerSurveyDatas(long customerId)
         {
             using (var db = new SqlConnection(_connectionStrings.ConsentForm))
