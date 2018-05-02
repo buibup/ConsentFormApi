@@ -8,6 +8,7 @@ namespace ConsentFormApi.Service
 {
     public interface ISurveyDataService
     {
-        List<SubTopicValue> SubTopicValuesByYear(int year);
+        List<SubTopicValue> GetSubTopicValuesByYear(int surveyId, int year);
+        List<SubTopicValue> GetSubTopicValuesByMonth(int surveyId, int year, int month);
     }
 }

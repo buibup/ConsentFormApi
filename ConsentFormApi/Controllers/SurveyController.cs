@@ -16,11 +16,14 @@ namespace ConsentFormApi.Controllers
     {
         private readonly ISurveyRepository _surveyRepository;
         private readonly ISurveyChartsService _surveyChartsService;
+        private readonly ISurveyDataService _surveyDataService;
 
-        public SurveyController(ISurveyRepository surveyRepository, ISurveyChartsService surveyChartsService)
+        public SurveyController(ISurveyRepository surveyRepository, ISurveyChartsService surveyChartsService,
+            ISurveyDataService surveyDataService)
         {
             _surveyRepository = surveyRepository;
             _surveyChartsService = surveyChartsService;
+            _surveyDataService = surveyDataService;
         }
 
         [HttpGet("[action]")]
@@ -32,7 +35,7 @@ namespace ConsentFormApi.Controllers
         [HttpGet("[action]/{id}")]
         public IActionResult GetSurvey(long id)
         {
-            return Ok(_surveyRepository.GetSurveyChild(id));
+            return Ok(_surveyRepository.GetSurvey(id));
         }
 
         [HttpDelete("[action]/{id}")]
@@ -80,6 +83,12 @@ namespace ConsentFormApi.Controllers
         public IActionResult GetSurveyChart(int year)
         {
             return Ok(_surveyChartsService.GetSurveyBarChart(year));
+        }
+
+        [HttpGet("[action]/{surveyId}/{year}/{month}")]
+        public IActionResult GetSubTopicValuesByMonth(int surveyId, int year, int month)
+        {
+            return Ok(_surveyDataService.GetSubTopicValuesByMonth(surveyId, year, month));
         }
     }
 }

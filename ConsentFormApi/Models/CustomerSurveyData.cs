@@ -12,7 +12,7 @@ namespace ConsentFormApi.Models
         public long SurveyId { get; set; }
         public long TopicId { get; set; }
         public long SubTopicId { get; set; }
-        public decimal value { get; set; }
+        public double value { get; set; }
         public DateTime? CreatedAt { get; set; }
     }
 }

@@ -28,9 +28,11 @@ namespace ConsentFormApi
             services.AddMvc();
 
             services.AddTransient<ICustomerSurveyRepository, CustomerSurveyRepository>();
-            services.AddTransient<ICustomerSurveyService, CustomerSurveyService>();
             services.AddTransient<ISurveyRepository, SurveyRepository>();
+            
+            services.AddTransient<ICustomerSurveyService, CustomerSurveyService>();
             services.AddTransient<ISurveyChartsService, SurveyChartsService>();
+            services.AddTransient<ISurveyDataService, SurveyDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

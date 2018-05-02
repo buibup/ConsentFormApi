@@ -21,11 +21,19 @@ namespace ConsentFormApi.Repository
             _connectionStrings = connectionStrings;
         }
 
-        public IEnumerable<CustomerSurveyData> CustomerSurveyData(int year)
+        public IEnumerable<CustomerSurveyData> GetCustomerSurveyData(int surveyId, int year)
         {
             using(var db = new SqlConnection(_connectionStrings.ConsentForm))
             {
-                return db.Query<CustomerSurveyData>(CustomerSurveyDbQuery.CustomersSurveysDataByYear(), new { year }).ToList();
+                return db.Query<CustomerSurveyData>(CustomerSurveyDbQuery.GetCustomerSurveyDataByYear(), new { @Year = year, @SurveyId = surveyId }).ToList();
+            }
+        }
+
+        public IEnumerable<CustomerSurveyData> GetCustomerSurveyData(int surveyId, int year, int month)
+        {
+            using(var db = new SqlConnection(_connectionStrings.ConsentForm))
+            {
+                return db.Query<CustomerSurveyData>(CustomerSurveyDbQuery.GetCustomerSurveyDataByMonth(), new { @Year = year, @Month = month, @SurveyId = surveyId }).ToList();
             }
         }
 

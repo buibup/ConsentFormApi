@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ConsentFormApi.Controllers
 {
     [Produces("application/json")]
-    //[Route("api/CustomerSurvey")]
+    [Route("api/CustomerSurvey")]
     public class CustomerSurveyController : Controller
     {
         private readonly ICustomerSurveyService _customerSurveyService;
@@ -19,7 +19,7 @@ namespace ConsentFormApi.Controllers
             _customerSurveyService = customerSurveyService;
         }
 
-        [HttpGet("api/[controller]/[action]/{customerId}")]
+        [HttpGet("[action]/{customerId}")]
         public IActionResult GetCustomerSurveys(long customerId)
         {
             return Ok(_customerSurveyService.GetCustomerSurveyDatas(customerId));
